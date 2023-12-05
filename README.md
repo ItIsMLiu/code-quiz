@@ -11,18 +11,24 @@ Screenshot of webpage and console:
 ![alt text](./assets/images/screencapture1.png)
 
 A starter code pack (as shown in the second commit) was provided, including the HTML files, CSS file, and a JavaScript file. Subsequently, the project was developed incorporating my newly acquired JavaScript knowledge. Below, I've highlighted the integration of these skills within the project:
-<!--
-- Use of a while loop.
-- xxxx
--->
+
+- How to traverse through DOM accessing elements.
+- Setting Attributes in JS and changing styles of elements.
+- Create new and apending elements in JS.
+- Setting timers Intervals
+- Listen for a click event & keyboard events.
+- Prevent default action.
+- Event Bubbling
+- Data Attributes
+- Local storage
+
 ## Installation
 
 N/A
 
 ## Usage 
-<!--
-Open the webpage by clicking on the provided URL link. Click on the red button labeled 'Generate Password.' A window will prompt you to enter a number from 8 to 128, indicating your desired password length. Once you've entered the desired length, the system will ask you to confirm whether to include the four different character types. At least one character type must be included. If you enter a password length that is not in the provided range or don't any character type, the browser will prompt you again until the specified criteria are met. Finally, you will see a randomly generated password based on your selected character type(s) in the dashed box. To generate a new random password, simply refresh the page and repeat the above steps.
--->
+
+To initiate the website experience, access the provided URL link and proceed by selecting the purple button labeled 'Start Quiz.' This action triggers a timer countdown of 75 seconds, initiating a series of JavaScript fundamentals quiz questions. The quiz begins with a start button, triggering a timer and revealing the initial question. Subsequent questions feature answer buttons, with the selection of an answer leading to the presentation of the next question. If an incorrect answer is chosen, time is deducted from the countdown clock. The quiz concludes either when all questions are answered or when the timer reaches zero. Upon completion, the website displays the user's score and offers the option to save their initials along with the achieved score.
 
 ## Credits
 
