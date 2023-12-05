@@ -27,8 +27,7 @@ Open the webpage by clicking on the provided URL link. Click on the red button l
 ## Credits
 
 Other resources used as guides:
-<!--
--->
+- remove the background-color and opacity property using Javascript only: https://stackoverflow.com/questions/40380676/javascript-remove-background-color-and-opacity
 
 ## License
 
