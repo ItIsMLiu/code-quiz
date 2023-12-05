@@ -7,7 +7,7 @@ The URL of the deployed application: https://itismliu.github.io/code-quiz/
 
 The URL of the GitHub repository: https://github.com/ItIsMLiu/code-quiz
 
-Screenshot of webpage and console:
+Screenshot of webpage:
 ![alt text](./assets/images/screencapture1.png)
 
 A starter code pack (as shown in the second commit) was provided, including the HTML files, CSS file, and a JavaScript file. Subsequently, the project was developed incorporating my newly acquired JavaScript knowledge. Below, I've highlighted the integration of these skills within the project:
