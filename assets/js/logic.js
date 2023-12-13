@@ -40,8 +40,6 @@ for (let i=0; i<liEl.length; i++) {
 
 let secondsLeft = 75;
 let msgDiv = document.createElement('div');
-let horiRule = document.createElement('hr');
-let correctWrong = document.createElement("p");
 let currentQuestionIndex = 0; // Keep track of the current question
 
 function countdown() {
@@ -88,15 +86,13 @@ listEl.addEventListener("click", function(event) {
         let selectedAnswer = event.target.textContent;
         
         if (selectedAnswer.charAt(0) === questionsArray[currentQuestionIndex].correctAnswer) {
+            msgDiv.setAttribute('class', 'feedback');
+            msgDiv.textContent = "Correct";
             choicesEl.appendChild(msgDiv);
-            msgDiv.appendChild(horiRule);
-            correctWrong.textContent = "Correct";
-            msgDiv.appendChild(correctWrong);
         } else {
+            msgDiv.setAttribute('class', 'feedback');
+            msgDiv.textContent = "Wrong";
             choicesEl.appendChild(msgDiv);
-            msgDiv.appendChild(horiRule);
-            correctWrong.textContent = "Wrong";
-            msgDiv.appendChild(correctWrong);
             secondsLeft = secondsLeft - 15
         }
 
