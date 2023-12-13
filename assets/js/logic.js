@@ -38,6 +38,9 @@ for (let i=0; i<liEl.length; i++) {
     liEl[i].setAttribute("style", "list-style: none; background-color: transparent;");
 };
 
+let correctWrong = document.createElement("p");
+choicesEl.appendChild(correctWrong);
+
 let currentQuestionIndex = 0; // Keep track of the current question
 
 function countdown() {
@@ -69,7 +72,7 @@ function newQuestion() {
 }
 
 function checkAnswer(selectedAnswer) {
-    let isCorrect = selectedAnswer === questionsArray[currentQuestionIndex].correctAnswer;
+    let isCorrect = selectedAnswer.charAt(questionsArray[currentQuestionIndex].correctAnswer);
     return isCorrect;
 }
 
@@ -88,10 +91,9 @@ startQuizBtn.addEventListener("click", function() {
 listEl.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON") {
         let selectedAnswer = event.target.textContent;
+        console.log (selectedAnswer);
         let isCorrect = checkAnswer(selectedAnswer);
 
-        let correctWrong = document.createElement("p");
-        choicesEl.appendChild(correctWrong);
         if (isCorrect) {
             correctWrong.textContent = "Correct";
         } else {
