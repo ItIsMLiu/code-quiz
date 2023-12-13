@@ -39,10 +39,9 @@ for (let i=0; i<liEl.length; i++) {
 };
 
 let secondsLeft = 75;
+let msgDiv = document.createElement('div');
 let horiRule = document.createElement('hr');
 let correctWrong = document.createElement("p");
-
-
 let currentQuestionIndex = 0; // Keep track of the current question
 
 function countdown() {
@@ -87,17 +86,23 @@ startQuizBtn.addEventListener("click", function() {
 listEl.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON") {
         let selectedAnswer = event.target.textContent;
-
+        
         if (selectedAnswer.charAt(0) === questionsArray[currentQuestionIndex].correctAnswer) {
-            choicesEl.appendChild(horiRule);
+            choicesEl.appendChild(msgDiv);
+            msgDiv.appendChild(horiRule);
             correctWrong.textContent = "Correct";
-            choicesEl.appendChild(correctWrong);
+            msgDiv.appendChild(correctWrong);
         } else {
-            choicesEl.appendChild(horiRule);
+            choicesEl.appendChild(msgDiv);
+            msgDiv.appendChild(horiRule);
             correctWrong.textContent = "Wrong";
-            choicesEl.appendChild(correctWrong);
+            msgDiv.appendChild(correctWrong);
             secondsLeft = secondsLeft - 15
         }
+
+        setTimeout(function() {
+            msgDiv.remove();
+        }, 1000);
 
         // Move to the next question
         currentQuestionIndex++;
