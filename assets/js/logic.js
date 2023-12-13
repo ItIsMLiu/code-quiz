@@ -38,15 +38,16 @@ for (let i=0; i<liEl.length; i++) {
     liEl[i].setAttribute("style", "list-style: none; background-color: transparent;");
 };
 
+let secondsLeft = 75;
+let horiRule = document.createElement('hr');
 let correctWrong = document.createElement("p");
-choicesEl.appendChild(correctWrong);
+
 
 let currentQuestionIndex = 0; // Keep track of the current question
 
 function countdown() {
     // Select time span element by ID
     let timerEl = document.querySelector("#time");
-    let secondsLeft = 75;
 
     let timeInterval = setInterval(function() {
         if (secondsLeft > 0) {
@@ -71,11 +72,6 @@ function newQuestion() {
     questionTitleEl.textContent = questionsArray[currentQuestionIndex].ask;
 }
 
-function checkAnswer(selectedAnswer) {
-    let isCorrect = selectedAnswer.charAt(questionsArray[currentQuestionIndex].correctAnswer);
-    return isCorrect;
-}
-
 // Listen for a click event on start quiz button
 startQuizBtn.addEventListener("click", function() {
     // start timer
@@ -91,13 +87,16 @@ startQuizBtn.addEventListener("click", function() {
 listEl.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON") {
         let selectedAnswer = event.target.textContent;
-        console.log (selectedAnswer);
-        let isCorrect = checkAnswer(selectedAnswer);
 
-        if (isCorrect) {
+        if (selectedAnswer.charAt(0) === questionsArray[currentQuestionIndex].correctAnswer) {
+            choicesEl.appendChild(horiRule);
             correctWrong.textContent = "Correct";
+            choicesEl.appendChild(correctWrong);
         } else {
+            choicesEl.appendChild(horiRule);
             correctWrong.textContent = "Wrong";
+            choicesEl.appendChild(correctWrong);
+            secondsLeft = secondsLeft - 15
         }
 
         // Move to the next question
