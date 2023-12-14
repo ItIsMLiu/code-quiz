@@ -6,6 +6,7 @@ let questionsEl = document.getElementById("questions");
 let questionTitleEl = document.getElementById("question-title");
 let choicesEl = document.getElementById("choices");
 let endScreenEl = document.getElementById("end-screen");
+let feedbackEl = document.getElementById("feedback");
 
 // Create unordered list element
 let listEl = document.createElement("ul");
@@ -37,16 +38,16 @@ let liEl = document.querySelectorAll("li");
 for (let i=0; i<liEl.length; i++) {
     liEl[i].setAttribute("style", "list-style: none; background-color: transparent;");
 };
-
+let timeInterval;
+let selectedAnswer;
+let timerEl = document.querySelector("#time"); // Select time span element by ID
 let secondsLeft = 75;
 let msgDiv = document.createElement('div');
 let currentQuestionIndex = 0; // Keep track of the current question
+let finalScore = document.getElementById("final-score");
 
 function countdown() {
-    // Select time span element by ID
-    let timerEl = document.querySelector("#time");
-
-    let timeInterval = setInterval(function() {
+    timeInterval = setInterval(function() {
         if (secondsLeft > 0) {
             // Set the `textContent` of `timerEl` to show the time left
             timerEl.textContent = secondsLeft;
@@ -69,6 +70,20 @@ function newQuestion() {
     questionTitleEl.textContent = questionsArray[currentQuestionIndex].ask;
 }
 
+function displayMessage() {
+    feedbackEl.style.display = 'block';
+    feedbackEl.appendChild(msgDiv);
+    if (selectedAnswer.charAt(0) === questionsArray[currentQuestionIndex].correctAnswer) {
+        msgDiv.textContent = "Correct!";
+    } else {
+        msgDiv.textContent = "Wrong!";
+        secondsLeft = secondsLeft - 15
+    }
+    setTimeout(function() {
+        feedbackEl.style.display = 'none';
+    }, 1000);
+}
+
 // Listen for a click event on start quiz button
 startQuizBtn.addEventListener("click", function() {
     // start timer
@@ -83,22 +98,9 @@ startQuizBtn.addEventListener("click", function() {
 
 listEl.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON") {
-        let selectedAnswer = event.target.textContent;
-        
-        if (selectedAnswer.charAt(0) === questionsArray[currentQuestionIndex].correctAnswer) {
-            msgDiv.setAttribute('class', 'feedback');
-            msgDiv.textContent = "Correct";
-            choicesEl.appendChild(msgDiv);
-        } else {
-            msgDiv.setAttribute('class', 'feedback');
-            msgDiv.textContent = "Wrong";
-            choicesEl.appendChild(msgDiv);
-            secondsLeft = secondsLeft - 15
-        }
+        selectedAnswer = event.target.textContent;
 
-        setTimeout(function() {
-            msgDiv.remove();
-        }, 1000);
+        displayMessage()
 
         // Move to the next question
         currentQuestionIndex++;
@@ -107,6 +109,15 @@ listEl.addEventListener("click", function(event) {
         } else {
             questionsEl.style.display = 'none';
             endScreenEl.style.display = 'block';
+
+            if (secondsLeft>0){
+                clearInterval(timeInterval); // Stop the timer
+                finalScore.textContent = secondsLeft;
+            } else {
+                clearInterval(timeInterval); // Stop the timer
+                timerEl.textContent = "0";
+                finalScore.textContent = 0
+            } 
         }
     }
 });
