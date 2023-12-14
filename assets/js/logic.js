@@ -11,9 +11,10 @@ let currentQuestionIndex = 0; // Keep track of the current question
 
 // End-screen elements
 let endScreenEl = document.getElementById("end-screen");
-let finalScore = document.getElementById("final-score");
-let initials = document.getElementById("initials");
+let finalScoreEl = document.getElementById("final-score");
+let initialsInput = document.getElementById("initials");
 let submitBtn = document.getElementById("submit");
+let finalScore
 
 // Feedback
 let feedbackEl = document.getElementById("feedback");
@@ -55,6 +56,9 @@ for (let i=0; i<liEl.length; i++) {
 let timeInterval;
 let timerEl = document.querySelector("#time"); // Select time span element by ID
 let secondsLeft = 75;
+
+// Highscores page element
+let scoresRecords = [];
 
 function countdown() {
     timeInterval = setInterval(function() {
@@ -121,19 +125,28 @@ listEl.addEventListener("click", function(event) {
             endScreenEl.style.display = 'block';
 
             if (secondsLeft>0){
-                finalScore.textContent = secondsLeft;
+                finalScoreEl.textContent = secondsLeft;
                 timerEl.textContent = secondsLeft
                 clearInterval(timeInterval); // Stop the timer
             } else {
                 clearInterval(timeInterval); // Stop the timer
                 timerEl.textContent = "0";
-                finalScore.textContent = 0
+                finalScoreEl.textContent = 0
             } 
+            finalScore = secondsLeft;
+            return finalScore;
         }
     }
 });
 
 submitBtn.addEventListener("click", function(event){
     event.preventDefault();
-    window.location.href = "highscores.html";
+    let userInitials = initialsInput.value.trim();
+    if (userInitials === ""){
+        alert("Please enter your initials.");
+    } else {
+        window.location.href = "highscores.html";
+        scoresRecords.push({userInitials, finalScore});
+        localStorage.setItem("Records", JSON.stringify(scoresRecords));
+    }
 })
