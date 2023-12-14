@@ -142,11 +142,25 @@ listEl.addEventListener("click", function(event) {
 submitBtn.addEventListener("click", function(event){
     event.preventDefault();
     let userInitials = initialsInput.value.trim();
+    
+    let storedScores = JSON.parse(localStorage.getItem("Records"));
+    if (storedScores !== null) {
+        scoresRecords = storedScores;
+    } 
+
+    scoresRecords.push({userInitials, finalScore});
+    localStorage.setItem("Records", JSON.stringify(scoresRecords));
+
     if (userInitials === ""){
         alert("Please enter your initials.");
     } else {
         window.location.href = "highscores.html";
-        scoresRecords.push({userInitials, finalScore});
-        localStorage.setItem("Records", JSON.stringify(scoresRecords));
+        for (let i = 0; i < scoresRecords.length; i++) {
+            let highscoresOl = document.getElementById("highscores");
+            let score = scoresRecords[i];
+            let scoreLi = document.createElement('li');
+            scoreLi.textContent = score.userInitials + ': ' + score.finalScore;
+            highscoresOl.appendChild(scoreLi);
+        }
     }
 })
