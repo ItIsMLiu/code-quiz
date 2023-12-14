@@ -1,13 +1,25 @@
-// Access start quiz button HTML element
+// Start-screen Elements - Access start quiz button HTML element
 let startQuizBtn = document.getElementById("start");
-
 let startScreenEl = document.getElementById("start-screen");
+
+// Question screen elements
 let questionsEl = document.getElementById("questions");
 let questionTitleEl = document.getElementById("question-title");
 let choicesEl = document.getElementById("choices");
-let endScreenEl = document.getElementById("end-screen");
-let feedbackEl = document.getElementById("feedback");
+let selectedAnswer;
+let currentQuestionIndex = 0; // Keep track of the current question
 
+// End-screen elements
+let endScreenEl = document.getElementById("end-screen");
+let finalScore = document.getElementById("final-score");
+let initials = document.getElementById("initials");
+let submitBtn = document.getElementById("submit");
+
+// Feedback
+let feedbackEl = document.getElementById("feedback");
+let msgDiv = document.createElement('div');
+
+// Create additional element in HTML.
 // Create unordered list element
 let listEl = document.createElement("ul");
 // Create unordered list item elements
@@ -38,13 +50,11 @@ let liEl = document.querySelectorAll("li");
 for (let i=0; i<liEl.length; i++) {
     liEl[i].setAttribute("style", "list-style: none; background-color: transparent;");
 };
+
+// Timer section
 let timeInterval;
-let selectedAnswer;
 let timerEl = document.querySelector("#time"); // Select time span element by ID
 let secondsLeft = 75;
-let msgDiv = document.createElement('div');
-let currentQuestionIndex = 0; // Keep track of the current question
-let finalScore = document.getElementById("final-score");
 
 function countdown() {
     timeInterval = setInterval(function() {
@@ -111,8 +121,9 @@ listEl.addEventListener("click", function(event) {
             endScreenEl.style.display = 'block';
 
             if (secondsLeft>0){
-                clearInterval(timeInterval); // Stop the timer
                 finalScore.textContent = secondsLeft;
+                timerEl.textContent = secondsLeft
+                clearInterval(timeInterval); // Stop the timer
             } else {
                 clearInterval(timeInterval); // Stop the timer
                 timerEl.textContent = "0";
@@ -121,3 +132,8 @@ listEl.addEventListener("click", function(event) {
         }
     }
 });
+
+submitBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    window.location.href = "highscores.html";
+})
