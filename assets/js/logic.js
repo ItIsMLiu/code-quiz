@@ -148,12 +148,11 @@ submitBtn.addEventListener("click", function(event){
         scoresRecords = storedScores;
     } 
 
-    scoresRecords.push({userInitials, finalScore});
-    localStorage.setItem("Records", JSON.stringify(scoresRecords));
-
     if (userInitials === ""){
         alert("Please enter your initials.");
     } else {
+        scoresRecords.push({userInitials, finalScore});
+        localStorage.setItem("Records", JSON.stringify(scoresRecords));
         window.location.href = "highscores.html";
     }
 })
