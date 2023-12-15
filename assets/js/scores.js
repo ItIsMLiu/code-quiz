@@ -7,3 +7,9 @@ for (let i = 0; i < storedScores.length; i++) {
     scoreLi.textContent = score.userInitials + ': ' + score.finalScore;
     highscoresOl.appendChild(scoreLi);
 }
+
+let clearBtn = document.getElementById("clear");
+clearBtn.addEventListener("click", function(event){
+    localStorage.clear();
+    location.reload();
+})

@@ -128,12 +128,13 @@ listEl.addEventListener("click", function(event) {
                 finalScoreEl.textContent = secondsLeft;
                 timerEl.textContent = secondsLeft
                 clearInterval(timeInterval); // Stop the timer
+                finalScore = secondsLeft;
             } else {
                 clearInterval(timeInterval); // Stop the timer
                 timerEl.textContent = "0";
                 finalScoreEl.textContent = 0
+                finalScore = 0;
             } 
-            finalScore = secondsLeft;
             return finalScore;
         }
     }
