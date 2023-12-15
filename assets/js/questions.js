@@ -5,7 +5,7 @@ let questionsArray = [
         correctAnswer: 'C' 
     },
     {
-        ask: '2/5. The condition in an if / else statment is enclosed within _____.',
+        ask: '2/5. The condition in an if / else statement is enclosed within _____.',
         answerOptions: ['A. quotes', 'B. curlybrackets', 'C. parentheses', 'D. square brackets'],
         correctAnswer: 'C' 
     },
